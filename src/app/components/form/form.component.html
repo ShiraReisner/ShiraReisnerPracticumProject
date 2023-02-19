@@ -1,0 +1,98 @@
+<div class="container">
+    <h1> Add User </h1>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <p>
+            <label for="name">First Name:</label>
+            <input type="text" id="firstName" name="firstName" formControlName="firstName" class="form-control">
+            <span *ngIf="userForm.get('firstName')?.errors?.['required']" class="error">
+                First name is required.
+            </span>
+        </p>
+        <p>
+            <label for="name">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" formControlName="lastName" class="form-control">
+            <span *ngIf="userForm.get('lastName')?.errors?.['required']" class="error">
+                Last name is required.
+            </span>
+        </p>
+        <p>
+            <label for="name">Birthday:</label>
+            <input type="date" id="birthday" name="birthday" formControlName="birthday" class="form-control">
+            <span *ngIf="userForm.get('birthday')?.errors?.['required']" class="error">
+                birthday is required.
+            </span>
+        </p>
+        <p>
+            <label for="name">TZ:</label>
+            <input type="text" id="TZ" name="TZ" formControlName="TZ" class="form-control">
+            <span *ngIf="userForm.get('TZ')?.errors?.['required']" class="error">
+                TZ is required.
+            </span>
+        </p>
+        <p>
+            <label for="name">Gender:</label>
+            <select id="gender" name="gender" formControlName="gender" class="form-control">
+                <option value="1">female</option>
+                <option value="2">male</option>
+            </select>
+            <span *ngIf="userForm.get('gender')?.errors?.['required']" class="error">
+                gender is required.
+            </span>
+        </p>
+        <p>
+            <label for="name">HMO:</label>
+            <select id="HMO" name="HMO" formControlName="HMO" class="form-control">
+                <option value="1">maccabi</option>
+                <option value="2">leumit</option>
+            </select>
+            <span *ngIf="userForm.get('HMO')?.errors?.['required']" class="error">
+                HMO is required.
+            </span>
+        </p>
+        <table class="table table-bordered" formArrayName="children">
+            <tr>
+                <th colspan="5">Add Children:</th>
+                <th width="150px"><button type="button" (click)="addChild()" class="btn btn-primary">Add Child</button>
+                </th>
+            </tr>
+            <tr *ngFor="let child of children().controls; let i=index" [formGroupName]="i">
+                <td>
+                    First Name:
+                    <input type="text" formControlName="firstName" class="form-control">
+                    <span *ngIf="children().controls[i].get('firstName')?.errors?.['required']" class=" error">
+                        First Name required.
+                    </span>
+                </td>
+                <td>
+                    Birthday:
+                    <input type="date" formControlName="birthday" class="form-control">
+                    <span *ngIf="children().controls[i].get('birthday')?.errors?.['required']" class=" error">
+                        birthday required.
+                    </span>
+                </td>
+                <td>
+                    TZ:
+                    <input type="text" formControlName="TZ" class="form-control">
+                    <span *ngIf="children().controls[i].get('TZ')?.errors?.['required']" class=" error">
+                        TZ required.
+                    </span>
+                </td>
+                <td>
+                    Gender:
+                    <select id="gender" name="gender" formControlName="gender" class="form-control">
+                        <option value="1">female</option>
+                        <option value="2">male</option>
+                    </select>
+                    <span *ngIf="children().controls[i].get('gender')?.errors?.['required']" class=" error">
+                        gender required.
+                    </span>
+                </td>
+                <td>
+                    <button (click)="removeChild(i)" class="btn btn-danger">Remove</button>
+                </td>
+            </tr>
+        </table>
+        <button type="submit" class="btn btn-success" [disabled]="userForm.invalid">Submit</button>
+    </form>
+    <br />
+</div>

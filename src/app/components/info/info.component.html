@@ -1,0 +1,5 @@
+<p>WellCome To My HMO</p>
+<p *ngIf="user">{{user?.lastName}} {{user?.firstName}}</p>
+<button *ngIf="!user" type="button" (click)="add()" class="btn btn-warning">
+    add user to HMO
+</button>
